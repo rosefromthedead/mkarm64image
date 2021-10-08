@@ -3,7 +3,7 @@ use clap::Clap;
 use std::{io::{Read, Write}, path::PathBuf};
 
 #[derive(Clap)]
-#[clap(version = "0.0.1", author = "Tommy Hudson <thomhuds@protonmail.com>")]
+#[clap(version = "0.0.1", author = "Rose Hudson <thomhuds@protonmail.com>")]
 struct Args {
     #[clap(short, long)]
     overwrite: bool,
@@ -32,7 +32,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // code0
     let branch_64_bytes_ahead = 0x14000010;
     LE::write_u32(&mut data[0..4], branch_64_bytes_ahead);
-    
+
     // text_offset
     let mut entry_point = args.entry_point
         .map(|s| u64::from_str_radix(s.trim_start_matches("0x"), 16).ok())
@@ -57,4 +57,3 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     output_file.write_all(&data)?;
     Ok(())
 }
-
